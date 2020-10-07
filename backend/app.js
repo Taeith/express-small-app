@@ -1,9 +1,20 @@
 
 const express = require('express');
 
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
+
+mongoose.connect('mongodb+srv://taeith:x4Coibyiv4@cluster0.q7xmp.mongodb.net/test?retryWrites=true&w=majority', 
+	{
+	useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+	console.log("Connexion réussie à la base de données !");
+}).catch(() => {
+	console.log("La connexion à la base de données pas pas pu être établit.");
+});
 
 app.use((request, response, next) => {
 	response.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,7 +34,7 @@ app.post('/api/stuff', (request, response, next) => {
 
 app.use('/api/stuff', (request, response, next) => {
 	const stuff = [{
-		_id: 'oeihfzeoi',
+	  _id: 'oeihfzeoi',
       title: 'Mon premier objet',
       description: 'Les infos de mon premier objet',
       imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
